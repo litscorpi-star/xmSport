@@ -62,8 +62,19 @@ jobs:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
         run: node dist/index.js
       
-      - name: 处理结果
-        if: always()
-        run: |
-          echo "当前时间: $(date "+%Y/%m/%d %H:%M:%S")"
-          echo "工作流执行状态: ${{ job.status }}" 
+      # - name: 处理结果
+      #   if: always()
+      #   run: |
+      #     echo "当前时间: $(date "+%Y/%m/%d %H:%M:%S")"
+      #     echo "工作流执行状态: ${{ job.status }}" 
+
+      - name: 运行脚本1
+        env:
+          PHONE_NUMBER: ${{ secrets.PHONE_NUMBER1 }}
+          PASSWORD: ${{ secrets.PASSWORD1 }}
+          # DATA_JSON由上一步自动设置，不再需要用户手动配置
+          xmSportMinStep: ${{ secrets.xmSportMinStep || '20000' }}
+          xmSportMaxStep: ${{ secrets.xmSportMaxStep || '22000' }}
+          ENABLE_NOTIFY: ${{ secrets.ENABLE_NOTIFY || 'false' }}
+          
+        run: node dist/index.js
